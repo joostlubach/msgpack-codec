@@ -1,41 +1,50 @@
-import * as msgpack from '@msgpack/msgpack'
+import {
+  decode as msgpack_decode,
+  DecoderOptions,
+  encode as msgpack_encode,
+  EncoderOptions,
+  ExtensionCodec,
+} from '@msgpack/msgpack'
 import { ExtensionTypeCodec, ExtensionTypeDowngrade } from './types'
 
 export default class MsgpackCodec {
 
-  private extensionCodec = new msgpack.ExtensionCodec()
+  private extensionCodec = new ExtensionCodec()
 
-  public encode(data: any) {
-    return msgpack.encode(data, {extensionCodec: this.extensionCodec})
+  public encode(data: any, options: Omit<EncoderOptions<never>, 'extensionCodec'> = {}) {
+    return msgpack_encode(data, {
+      ...options,
+      extensionCodec: this.extensionCodec
+    })
   }
 
-  public decode(data: Uint8Array) {
-    return msgpack.decode(data, {extensionCodec: this.extensionCodec})
+  public decode(data: Uint8Array, options: Omit<DecoderOptions<never>, 'extensionCodec'> = {}) {
+    return msgpack_decode(data, {
+      ...options,
+      extensionCodec: this.extensionCodec
+    })
   }
 
-  public registerExtensionType<T>(type: number, codec: ExtensionTypeCodec<T>) {
+  public registerExtensionType<T>(type: number, {check, encode, decode}: ExtensionTypeCodec<T>) {
+    // msgpack doesn't check this, but `type` can only be a byte long.
+    if (type < 0 || type > 217) {
+      throw new Error(`Extension type must be between 0x00 and 0xFF, got 0x${type.toString(16)}`)
+    }
+
     this.extensionCodec.register({
       type,
-      encode: (val) => {
-        if (!codec.check(val)) { return null }
-        return codec.encode(val as any)
-      },
-      decode: (raw) => {
-        return codec.decode(raw) as any
-      }
+      encode: val => check(val) ? encode(val as any) : null,
+      decode
     })
   }
 
   public registerExtensionTypeDowngrade<T, U>(type: number, {check, downgrade, upgrade}: ExtensionTypeDowngrade<T, U>) {
-    this.extensionCodec.register({
-      type,
-
+    return this.registerExtensionType<T>(type, {
+      check,
       encode: (val) => {
-        if (!check(val)) { return null }
         const downgraded = downgrade(val as any)
         return this.encode(downgraded)
       },
-
       decode: (raw) => {
         const downgraded = this.decode(raw) as any
         return upgrade(downgraded) as any
