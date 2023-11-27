@@ -16,7 +16,7 @@ export default class MsgpackCodec {
     try {
       return msgpack_encode(data, {
         ...options,
-        extensionCodec: this.extensionCodec
+        extensionCodec: this.extensionCodec,
       })
     } catch (error) {
       throw new EncodeError(data, error)
@@ -27,7 +27,7 @@ export default class MsgpackCodec {
     try {
       return msgpack_decode(data, {
         ...options,
-        extensionCodec: this.extensionCodec
+        extensionCodec: this.extensionCodec,
       })
     } catch (error) {
       throw new DecodeError(error)
@@ -43,7 +43,7 @@ export default class MsgpackCodec {
     this.extensionCodec.register({
       type,
       encode: val => check(val) ? encode(val as any) : null,
-      decode
+      decode,
     })
   }
 
@@ -57,7 +57,7 @@ export default class MsgpackCodec {
       decode: (raw) => {
         const downgraded = this.decode(raw) as any
         return upgrade(downgraded) as any
-      }
+      },
     })
   }
 

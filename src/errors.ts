@@ -2,7 +2,7 @@ export class EncodeError extends Error {
 
   constructor(
     data: any,
-    cause: unknown
+    cause: unknown,
   ) {
     if (cause instanceof Error) {
       super(`Error while encoding data: ${cause.message}`, {cause})
