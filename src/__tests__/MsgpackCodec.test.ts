@@ -1,4 +1,5 @@
 import { Buffer } from 'buffer'
+
 import MsgpackCodec from '../MsgpackCodec'
 
 describe("MsgpackCodec", () => {

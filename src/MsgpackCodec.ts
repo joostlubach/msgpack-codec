@@ -5,6 +5,7 @@ import {
   EncoderOptions,
   ExtensionCodec,
 } from '@msgpack/msgpack'
+
 import { DecodeError, EncodeError } from './errors'
 import { ExtensionTypeCodec, ExtensionTypeDowngrade } from './types'
 
