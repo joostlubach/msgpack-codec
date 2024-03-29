@@ -1,2 +1,2 @@
-export { default } from './MsgpackCodec'
-export * from './types'
+export { default as MsgpackCodec } from './MsgpackCodec.js'
+export * from './types.js'

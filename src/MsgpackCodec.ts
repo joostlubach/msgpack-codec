@@ -6,8 +6,8 @@ import {
   ExtensionCodec,
 } from '@msgpack/msgpack'
 
-import { DecodeError, EncodeError } from './errors'
-import { ExtensionTypeCodec, ExtensionTypeDowngrade } from './types'
+import { DecodeError, EncodeError } from './errors.js'
+import { ExtensionTypeCodec, ExtensionTypeDowngrade } from './types.js'
 
 export default class MsgpackCodec {
 
