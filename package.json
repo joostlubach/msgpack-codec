@@ -1,7 +1,6 @@
 {
   "name": "msgpack-codec",
   "version": "0.0.1",
-  "type": "module",
   "description": "socket.io parser based on latest msgpack",
   "private": true,
   "author": "Joost Lubach <joostlubach@gmail.com>",
