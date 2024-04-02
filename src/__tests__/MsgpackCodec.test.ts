@@ -1,6 +1,6 @@
 import { Buffer } from 'buffer'
 
-import MsgpackCodec from '../MsgpackCodec.js'
+import MsgpackCodec from '../MsgpackCodec'
 
 describe("MsgpackCodec", () => {
   let codec: MsgpackCodec
