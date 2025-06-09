@@ -5,15 +5,14 @@ import {
   EncoderOptions,
   ExtensionCodec,
 } from '@msgpack/msgpack'
-
 import { DecodeError, EncodeError } from './errors'
-import { ExtensionTypeCodec, ExtensionTypeDowngrade } from './types'
+import { Decodeable, Encoded, ExtensionTypeCodec, ExtensionTypeDowngrade } from './types'
 
 export default class MsgpackCodec {
 
   private extensionCodec = new ExtensionCodec()
 
-  public encode(data: any, options: Omit<EncoderOptions<never>, 'extensionCodec'> = {}) {
+  public encode<T>(data: T, options: Omit<EncoderOptions<never>, 'extensionCodec'> = {}): Encoded<T> {
     try {
       return msgpack_encode(data, {
         ...options,
@@ -24,12 +23,12 @@ export default class MsgpackCodec {
     }
   }
 
-  public decode(data: Uint8Array, options: Omit<DecoderOptions<never>, 'extensionCodec'> = {}) {
+  public decode<T>(data: Decodeable<T>, options: Omit<DecoderOptions<never>, 'extensionCodec'> = {}): T {
     try {
       return msgpack_decode(data, {
         ...options,
         extensionCodec: this.extensionCodec,
-      })
+      }) as T
     } catch (error) {
       throw new DecodeError(error)
     }
@@ -43,7 +42,7 @@ export default class MsgpackCodec {
 
     this.extensionCodec.register({
       type,
-      encode: val => check(val) ? encode(val as any) : null,
+      encode: val => check(val) ? encode(val as T) : null,
       decode,
     })
   }
