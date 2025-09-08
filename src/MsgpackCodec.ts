@@ -6,13 +6,13 @@ import {
   ExtensionCodec,
 } from '@msgpack/msgpack'
 import { DecodeError, EncodeError } from './errors'
-import { Decodeable, Encoded, ExtensionTypeCodec, ExtensionTypeDowngrade } from './types'
+import { Decodable, Encoded, ExtensionTypeCodec, ExtensionTypeDowngrade } from './types'
 
 export default class MsgpackCodec {
 
   private extensionCodec = new ExtensionCodec()
 
-  public encode<T>(data: T, options: Omit<EncoderOptions<never>, 'extensionCodec'> = {}): Encoded<T> {
+  public encode<T>(data: T, options: Omit<EncoderOptions<never>, 'extensionCodec'> = {}): Encoded {
     try {
       return msgpack_encode(data, {
         ...options,
@@ -23,7 +23,7 @@ export default class MsgpackCodec {
     }
   }
 
-  public decode<T>(data: Decodeable<T>, options: Omit<DecoderOptions<never>, 'extensionCodec'> = {}): T {
+  public decode<T>(data: Decodable, options: Omit<DecoderOptions<never>, 'extensionCodec'> = {}): T {
     try {
       return msgpack_decode(data, {
         ...options,
