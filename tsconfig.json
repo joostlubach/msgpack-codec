@@ -17,7 +17,7 @@
     "moduleResolution": "NodeNext",
     "isolatedModules": true,
     "rootDir": "src",
-    "types": ["bun-types", "jest"]
+    "types": ["bun-types"]
   },
   "include": [
     "src"
