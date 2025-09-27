@@ -19,9 +19,6 @@
     "copyfiles": "^2.4.1",
     "fs": "^0.0.1-security",
     "jest": "^29.7.0",
-    "js-yaml": "^4.1.0",
-    "rimraf": "^5.0.5",
-    "tsc-alias": "^1.8.8",
     "typescript": "^5.8.3"
   },
   "dependencies": {
