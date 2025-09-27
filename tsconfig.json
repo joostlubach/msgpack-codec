@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "outDir": "dist",
+    "lib": ["ESNext"],
     "declaration": true,
     "sourceMap": true,
     "declarationMap": true,
@@ -16,7 +17,7 @@
     "moduleResolution": "NodeNext",
     "isolatedModules": true,
     "rootDir": "src",
-    "types": ["jest"]
+    "types": ["bun-types", "jest"]
   },
   "include": [
     "src"
