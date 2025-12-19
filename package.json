@@ -23,6 +23,13 @@
     "check": "tsc -p . --noEmit",
     "test": "NODE_ENV=test jest"
   },
+  "peerDependencies": {
+    "@msgpack/msgpack": "^3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "ytil": "workspace:^"
+  },
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/lodash": "^4.17.20",
@@ -40,10 +47,5 @@
     "js-yaml": "^4.1.1",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.3"
-  },
-  "dependencies": {
-    "@msgpack/msgpack": "3.0.0-beta2",
-    "lodash": "^4.17.21",
-    "ytil": "workspace:^"
   }
 }
