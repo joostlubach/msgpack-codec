@@ -1,4 +1,4 @@
-import { isArray } from 'lodash'
+import { isArray, mapValues } from 'lodash'
 import { isPlainObject, omitUndefined } from 'ytil'
 
 export function prepareData(data: unknown): unknown {
@@ -8,9 +8,10 @@ export function prepareData(data: unknown): unknown {
 export function recursivelyRemoveUndefined(obj: any): any {
   const iter = (value: unknown): unknown => {
     if (isArray(value)) {
-      return value.map(iter).filter(it => it !== undefined)
+      return value.map(iter)
     } else if (isPlainObject(value)) {
-      return omitUndefined(value)
+      const mapped = mapValues(value, iter)
+      return omitUndefined(mapped)
     } else {
       return value
     }
