@@ -1,12 +1,12 @@
 import {
   decode as msgpack_decode,
-  DecoderOptions,
+  type DecoderOptions,
   encode as msgpack_encode,
-  EncoderOptions,
+  type EncoderOptions,
   ExtensionCodec,
 } from '@msgpack/msgpack'
 import { DecodeError, EncodeError } from './errors'
-import { Decodable, Encoded, ExtensionTypeCodec, ExtensionTypeDowngrade } from './types'
+import { type Decodable, type Encoded, type ExtensionTypeCodec, type ExtensionTypeDowngrade } from './types'
 
 export default class MsgpackCodec {
 

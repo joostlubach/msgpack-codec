@@ -1,4 +1,4 @@
-import { decode, encode } from '@msgpack/msgpack'
+import { type decode, type encode } from '@msgpack/msgpack'
 
 export type Encoded = ReturnType<typeof encode> 
 export type Decodable = Parameters<typeof decode>[0]
