@@ -1,5 +1,4 @@
 import { Buffer } from 'buffer'
-
 import MsgpackCodec from '../MsgpackCodec'
 
 describe("MsgpackCodec", () => {
@@ -31,7 +30,7 @@ describe("MsgpackCodec", () => {
       codec.registerExtensionType<MyClass>(0x01, {
         check:  val => val instanceof MyClass,
         encode: val => Buffer.from(val.name),
-        decode: arr => new MyClass(Buffer.from(arr).toString()),
+        decode: arr => new MyClass(Buffer.from(arr as Uint8Array).toString()),
       })
 
       const val = new MyClass('foo')
