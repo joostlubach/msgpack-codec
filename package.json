@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.17.20",
-    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/eslint-plugin": "^8.61.0",
     "@typescript-eslint/parser": "^8.46.2",
     "buffer": "^6.0.3",
     "copyfiles": "^2.4.1",
@@ -42,9 +42,9 @@
     "eslint-plugin-unused-imports": "^4.3.0",
     "fs": "^0.0.1-security",
     "globals": "^16.4.0",
-    "yaml": "^2.8.2",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.3",
-    "vitest": "^4.0.18"
+    "vitest": "^4.0.18",
+    "yaml": "^2.8.2"
   }
 }
